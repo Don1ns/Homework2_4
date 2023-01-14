@@ -4,7 +4,7 @@ import driver.Driver;
 
 import java.util.Objects;
 
-public abstract class Transport implements Competing {
+public abstract class Transport<T extends Driver> implements Competing {
     private final String brand;
     private final String model;
     private float engineVolume;
@@ -54,6 +54,12 @@ public abstract class Transport implements Competing {
     public void stopMoving() {
         System.out.println("Закончить движение");
     }
+
+    public void drive(T driver) {
+        System.out.println("Водитель " + driver.getFullName() + " управляет автомобилем " + this + " и будет учавствовать в заезде.");
+    }
+
+    public abstract void printType();
 
     @Override
     public void setBestLapTime(float bestLapTime) {
