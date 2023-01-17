@@ -1,9 +1,12 @@
+import driver.Driver;
 import driver.DriverB;
 import driver.DriverC;
 import driver.DriverD;
+import exception.NoLicenseException;
 import transport.Bus;
 import transport.Car;
 import transport.Truck;
+import transport.Transport;
 
 public class Main {
     public static void main(String[] args) {
@@ -22,9 +25,9 @@ public class Main {
         Truck actros = new Truck("Mercedes-Benz", "Actros", (float) 11.9);
         Truck mazR = new Truck("МАЗ", "6440RR", (float) 12.5);
 
-        DriverB marat = new DriverB("Степанов Марат Кузнецов", 8);
-        DriverC andrey = new DriverC("Александров Андрей Михаилович", 10);
-        DriverD ivan = new DriverD("Степанов Иван Андреевич", 10);
+        DriverB marat = new DriverB("Степанов Марат Кузнецов",false, 8);
+        DriverC andrey = new DriverC("Александров Андрей Михаилович",true, 10);
+        DriverD ivan = new DriverD("Степанов Иван Андреевич",true, 10);
         System.out.println(bmw);
         System.out.println(sprinter);
         System.out.println(actros);
@@ -39,7 +42,21 @@ public class Main {
 
         bmw.setCarType(Car.CarType.COUPE);
         bmw.printType();
-
-
+        try{
+            bmw.getDiagnose(marat);
+        }
+        catch (NoLicenseException e){
+            System.out.println("Произошла ошибка с водителем " + e.getDriver().getFullName());
+            System.out.println(e.getMessage());
+        }
     }
+//    public static void getDiagnose(Transport transport, Driver driver){
+//       try{
+//           transport.getDiagnose(driver);
+//       }
+//       catch (NoLicenseException e){
+//           System.out.println("Произошла ошибка с водителем " + e.getDriver().getFullName());
+//           System.out.println(e.getMessage());
+//       }
+//    }
 }

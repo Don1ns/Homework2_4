@@ -1,6 +1,7 @@
 package transport;
 
 import driver.DriverB;
+import exception.NoLicenseException;
 
 
 public class Car extends Transport<DriverB> implements Competing {
@@ -42,6 +43,16 @@ public class Car extends Transport<DriverB> implements Competing {
 
     public void setCarType(CarType carType) {
         this.carType = carType;
+    }
+
+    @Override
+    public void getDiagnose(DriverB driver) throws NoLicenseException {
+        if(driver.isDriverLicense()) {
+            System.out.println(this + " проходит диагностику. Водитель: " + driver.getFullName());
+        }
+        else{
+            throw new NoLicenseException("У водителя должны быть права.", driver);
+        }
     }
 
     @Override

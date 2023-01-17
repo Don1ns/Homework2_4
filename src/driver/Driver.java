@@ -5,8 +5,8 @@ public abstract class Driver{
     private boolean driverLicense;
     private int drivingExperience;
 
-    public Driver(String fullName, int drivingExperience) {
-        this.driverLicense = true;
+    public Driver(String fullName,boolean driverLicense, int drivingExperience) {
+        this.driverLicense = driverLicense;
         setFullName(fullName);
         setDrivingExperience(drivingExperience);
     }

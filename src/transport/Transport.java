@@ -1,6 +1,7 @@
 package transport;
 
 import driver.Driver;
+import exception.NoLicenseException;
 
 import java.util.Objects;
 
@@ -9,7 +10,6 @@ public abstract class Transport<T extends Driver> implements Competing {
     private final String model;
     private float engineVolume;
     private float bestLapTime;
-
     private int maxSpeed;
 
 
@@ -61,6 +61,10 @@ public abstract class Transport<T extends Driver> implements Competing {
 
     public abstract void printType();
 
+    public void getDiagnose(T driver) throws NoLicenseException {
+
+    }
+
     @Override
     public void setBestLapTime(float bestLapTime) {
         if (bestLapTime > 0) {
@@ -94,8 +98,8 @@ public abstract class Transport<T extends Driver> implements Competing {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Transport transport = (Transport) o;
-        return Float.compare(transport.engineVolume, engineVolume) == 0 && Objects.equals(brand, transport.brand) && Objects.equals(model, transport.model);
+        Transport<?> transport = (Transport<?>) o;
+        return Float.compare(transport.engineVolume, engineVolume) == 0 && Float.compare(transport.bestLapTime, bestLapTime) == 0 && maxSpeed == transport.maxSpeed && Objects.equals(brand, transport.brand) && Objects.equals(model, transport.model);
     }
 
     @Override
