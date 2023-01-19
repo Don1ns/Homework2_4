@@ -36,4 +36,10 @@ public abstract class Driver{
             this.drivingExperience = drivingExperience;
         }
     }
+
+    @Override
+    public String toString() {
+        return "Водитель " + fullName + ". Стаж: " + drivingExperience +
+                ". Наличие прав: " + drivingExperience;
+    }
 }

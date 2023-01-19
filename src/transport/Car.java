@@ -1,8 +1,6 @@
 package transport;
 
 import driver.DriverB;
-import exception.NoLicenseException;
-
 
 public class Car extends Transport<DriverB> implements Competing {
     public enum CarType {
@@ -46,13 +44,9 @@ public class Car extends Transport<DriverB> implements Competing {
     }
 
     @Override
-    public void getDiagnose(DriverB driver) throws NoLicenseException {
-        if(driver.isDriverLicense()) {
-            System.out.println(this + " проходит диагностику. Водитель: " + driver.getFullName());
-        }
-        else{
-            throw new NoLicenseException("У водителя должны быть права.", driver);
-        }
+    public void getDiagnose(DriverB driver) {
+        System.out.println(this + " проходит диагностику. Водитель: " + driver.getFullName());
+
     }
 
     @Override

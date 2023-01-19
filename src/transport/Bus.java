@@ -48,6 +48,12 @@ public class Bus extends Transport<DriverD> implements Competing {
     public void setBusType(BusType busType) {
         this.busType = busType;
     }
+
+    @Override
+    public void getDiagnose(DriverD driver) {
+        System.out.println("Автобусы не могут проходить диагностику.");
+    }
+
     @Override
     public void printType() {
         if (getBusType() != null){

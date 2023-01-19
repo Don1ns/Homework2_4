@@ -2,7 +2,6 @@ package transport;
 
 import driver.Driver;
 import exception.NoLicenseException;
-
 import java.util.Objects;
 
 public abstract class Transport<T extends Driver> implements Competing {
@@ -55,15 +54,17 @@ public abstract class Transport<T extends Driver> implements Competing {
         System.out.println("Закончить движение");
     }
 
-    public void drive(T driver) {
-        System.out.println("Водитель " + driver.getFullName() + " управляет автомобилем " + this + " и будет учавствовать в заезде.");
+    public void drive(T driver) throws NoLicenseException {
+        if (driver.isDriverLicense()) {
+            System.out.println("Водитель " + driver.getFullName() + " управляет автомобилем " + this + " и будет учавствовать в заезде.");
+        } else {
+            throw new NoLicenseException("У водителя должны быть права.", driver);
+        }
     }
 
     public abstract void printType();
 
-    public void getDiagnose(T driver) throws NoLicenseException {
-
-    }
+    public abstract void getDiagnose(T driver);
 
     @Override
     public void setBestLapTime(float bestLapTime) {
