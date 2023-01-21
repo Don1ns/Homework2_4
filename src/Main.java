@@ -8,14 +8,13 @@ import transport.Car;
 import transport.Truck;
 import transport.Transport;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws NoLicenseException {
-        List<Transport<?>> transportList = new ArrayList<>();
         List<Driver> driversList = new ArrayList<>();
-        List<Mechanic<?>> mechanicList = new ArrayList<>();
+        Set<Mechanic<?>> bmwMechanicSet = new HashSet<>();
+        Map<Transport<?>, Set<Mechanic<?>>> transportMechanicMap = new HashMap<>();
 
         Car bmw = new Car("BMW", "i8", (float) 1.5);
         Car audi = new Car("Audi", "R8", (float) 4.2);
@@ -40,24 +39,21 @@ public class Main {
         Mechanic<?> ilia = new Mechanic<>("Артемов Илья Анатаолиевич", "MechPRO");
         Mechanic<?> alexey = new Mechanic<>("Чуклин Алексей Михайлович", "Русский Механик");
 
-        System.out.println(bmw);
-        System.out.println(sprinter);
-        System.out.println(actros);
-
-        transportList.add(audi);
-        transportList.add(nefaz);
-        transportList.add(mazR);
-        System.out.println(transportList.size());
-
         driversList.add(marat);
         driversList.add(andrey);
         driversList.add(ivan);
         System.out.println(driversList.size());
 
-        mechanicList.add(artem);
-        mechanicList.add(ilia);
-        mechanicList.add(alexey);
-        System.out.println(driversList.size());
+        bmwMechanicSet.add(artem);
+        bmwMechanicSet.add(ilia);
+        bmwMechanicSet.add(alexey);
+        bmwMechanicSet.add(alexey);
+        System.out.println(bmwMechanicSet.size());
+        transportMechanicMap.put(bmw,bmwMechanicSet);
+
+        for (Map.Entry<Transport<?>, Set<Mechanic<?>>> transportMechanic : transportMechanicMap.entrySet()) {
+            System.out.println("Автомобиль " + transportMechanic.getKey() + ". Механики: " + transportMechanic.getValue());
+        }
     }
 
     public static <T extends Driver> void drive(Transport<T> transport, T driver) {
@@ -68,4 +64,6 @@ public class Main {
             System.out.println(e.getMessage());
         }
     }
+
+
 }
