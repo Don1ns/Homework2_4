@@ -12,7 +12,7 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws NoLicenseException {
-        List<Driver> driversList = new ArrayList<>();
+        Set<Driver> driversSet = new HashSet<>();
         Set<Mechanic<?>> bmwMechanicSet = new HashSet<>();
         Map<Transport<?>, Set<Mechanic<?>>> transportMechanicMap = new HashMap<>();
 
@@ -39,10 +39,12 @@ public class Main {
         Mechanic<?> ilia = new Mechanic<>("Артемов Илья Анатаолиевич", "MechPRO");
         Mechanic<?> alexey = new Mechanic<>("Чуклин Алексей Михайлович", "Русский Механик");
 
-        driversList.add(marat);
-        driversList.add(andrey);
-        driversList.add(ivan);
-        System.out.println(driversList.size());
+        driversSet.add(marat);
+        driversSet.add(andrey);
+        driversSet.add(ivan);
+        for (Driver driver : driversSet) {
+            System.out.println(driver);
+        }
 
         bmwMechanicSet.add(artem);
         bmwMechanicSet.add(ilia);
